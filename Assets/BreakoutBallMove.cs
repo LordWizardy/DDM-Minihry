@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BreakoutBallMove : MonoBehaviour
 {
@@ -49,6 +50,14 @@ public class BreakoutBallMove : MonoBehaviour
         {
             speed += increase;
             Debug.Log(speed);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "DeathZone")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
