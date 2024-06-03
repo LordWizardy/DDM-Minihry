@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Flower
   - Bee
+  - Balloon
+  - WallPongLeft
+  - WallPongRight
+  - Brick
   layers:
   - Default
   - TransparentFX

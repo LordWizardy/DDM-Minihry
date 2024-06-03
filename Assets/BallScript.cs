@@ -1,16 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class BallScript : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float speed = 5;
     private float flip = 1;
+    public TMP_Text ScoreP1_Text;
+    public TMP_Text ScoreP2_Text;
+    private int ScoreP1 = 0;
+    private int ScoreP2 = 0;
+    private Vector3 StartTransform;
 
     // Start is called before the first frame update
     void Start()
     {
+        StartTransform = transform.position;
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.right * speed;
     }
@@ -70,5 +79,21 @@ public class BallScript : MonoBehaviour
         // ||
         // || -1 <- at the bottom of the racket
         return (ballPos.y - racketPos.y) / racketHeight;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("WallPongLeft"))
+        {
+            ScoreP2++;
+            ScoreP2_Text.text = ScoreP2.ToString();
+            transform.position = StartTransform;
+        }
+        else if (collision.gameObject.CompareTag("WallPongRight"))
+        {
+            ScoreP1++;
+            ScoreP1_Text.text = ScoreP1.ToString();
+            transform.position = StartTransform;
+        }
     }
 }
